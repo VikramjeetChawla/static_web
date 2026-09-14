@@ -1,41 +1,86 @@
 # Interactive 3D Animated Portfolio
 
-A modern, interactive portfolio website built with HTML, CSS, and JavaScript.
+> A modern, interactive, and responsive personal portfolio website designed to showcase professional experience, technical skills, projects, and achievements through an engaging web experience.
 
-![Portfolio Preview](Portfolio.png)
+---
 
-## 🚀 Features
+## 📖 About The Project
 
-- Modern and responsive design
-- Interactive animations
-- 3D-inspired visual effects
-- Projects showcase
-- Skills section
+This project is a personal portfolio website built to establish a professional online presence and provide a centralized platform for showcasing my development journey, technical expertise, projects, and experience.
+
+The portfolio focuses on:
+
+- Modern user interface design
+- Responsive layouts
+- Smooth animations
+- Interactive components
+- Clean and maintainable code
+- Performance-conscious development
+- Professional presentation
+
+The project is continuously evolving as new technologies, projects, and improvements are introduced.
+
+---
+
+## ✨ Features
+
+- Responsive design for desktop, tablet, and mobile
+- Modern and professional user interface
+- Interactive navigation
+- Smooth animations and transitions
+- Hero / introduction section
+- About section
+- Skills and technologies section
+- Featured projects section
 - Experience section
 - Contact section
-- Mobile-friendly layout
+- Social media integration
+- Semantic HTML structure
+- Responsive CSS architecture
+- Lightweight frontend implementation
+- GitHub Pages deployment support
+
+---
 
 ## 🛠️ Tech Stack
 
-- HTML5
-- CSS3
-- JavaScript
-- Git
-- GitHub Pages
+### Frontend
 
-## 📸 Preview
+| Technology | Purpose |
+|---|---|
+| HTML5 | Semantic structure and content |
+| CSS3 | Styling, layouts, animations, and responsiveness |
+| JavaScript | Interactivity and dynamic behavior |
 
-![Portfolio Preview](Portfolio.png)
+### Development & Deployment
 
-## 🎥 Demo
+| Tool | Purpose |
+|---|---|
+| Git | Version control |
+| GitHub | Source code management |
+| GitHub Pages | Website deployment |
+| Visual Studio Code | Development environment |
 
-[▶️ Watch Portfolio Demo](Portfolio.mp4)
+---
 
-## 📂 Project Structure
+## 🏗️ Project Architecture
 
 ```text
-my-portfolio/
+static_web/
+│
 ├── index.html
-├── Portfolio.png
-├── Portfolio.mp4
-└── README.md
+├── README.md
+│
+├── css/
+│   ├── style.css
+│   └── responsive.css
+│
+├── js/
+│   └── script.js
+│
+├── assets/
+│   ├── icons/
+│   ├── fonts/
+│   └── other/
+│
+└── .gitignore
