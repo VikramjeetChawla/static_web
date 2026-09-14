@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Your Name | Portfolio</title>
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #050505;
+      color: white;
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ================= BACKGROUND ================= */
+
+    .background {
+      position: fixed;
+      inset: 0;
+      z-index: -10;
+      overflow: hidden;
+      background:
+        radial-gradient(
+          circle at 50% 50%,
+          #151020 0%,
+          #050505 55%
+        );
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: .35;
+      pointer-events: none;
+    }
+
+    .orb1 {
+      width: 350px;
+      height: 350px;
+      background: #7c3aed;
+      top: -150px;
+      left: -100px;
+      animation: orbMove1 8s infinite alternate ease-in-out;
+    }
+
+    .orb2 {
+      width: 300px;
+      height: 300px;
+      background: #06b6d4;
+      right: -100px;
+      bottom: -100px;
+      animation: orbMove2 10s infinite alternate ease-in-out;
+    }
+
+    @keyframes orbMove1 {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      100% {
+        transform: translate(200px, 150px);
+      }
+    }
+
+    @keyframes orbMove2 {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      100% {
+        transform: translate(-150px, -120px);
+      }
+    }
+
+    /* ================= PARTICLES ================= */
+
+    .particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -5;
+    }
+
+    .particle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: #fff;
+      border-radius: 50%;
+      opacity: .4;
+      animation: particleFloat linear infinite;
+    }
+
+    @keyframes particleFloat {
+
+      from {
+        transform: translateY(100vh);
+      }
+
+      to {
+        transform: translateY(-10vh);
+      }
+
+    }
+
+    /* ================= MOUSE GLOW ================= */
+
+    .mouse-glow {
+      position: fixed;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      background: #7c3aed;
+      filter: blur(120px);
+      opacity: .08;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+    }
+
+    /* ================= MAIN ================= */
+
+    main {
+      width: 90%;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* ================= HERO ================= */
+
+    .hero {
+      position: relative;
+    }
+
+    .hello {
+      color: #a78bfa;
+      letter-spacing: 5px;
+      font-size: 14px;
+      opacity: 0;
+      animation: slideDown 1s .2s forwards;
+    }
+
+    .hero h1 {
+      font-size: clamp(60px, 11vw, 120px);
+      line-height: .95;
+      margin: 20px 0;
+
+      background:
+        linear-gradient(
+          90deg,
+          #ffffff,
+          #a78bfa,
+          #22d3ee,
+          #ffffff
+        );
+
+      background-size: 300%;
+
+      -webkit-background-clip: text;
+      color: transparent;
+
+      animation:
+        gradientMove 6s linear infinite,
+        slideUp 1s .4s forwards;
+
+      opacity: 0;
+    }
+
+    .role {
+      font-size: 24px;
+      color: #aaa;
+      margin-bottom: 15px;
+
+      opacity: 0;
+      animation: slideUp 1s .6s forwards;
+    }
+
+    .description {
+      color: #777;
+      max-width: 600px;
+      font-size: 18px;
+      line-height: 1.7;
+
+      opacity: 0;
+      animation: slideUp 1s .8s forwards;
+    }
+
+    /* ================= BUTTON ================= */
+
+    .button {
+      position: relative;
+      display: inline-block;
+      width: fit-content;
+
+      margin-top: 35px;
+      padding: 14px 28px;
+
+      color: white;
+      text-decoration: none;
+
+      border-radius: 40px;
+
+      background: linear-gradient(
+        90deg,
+        #7c3aed,
+        #06b6d4
+      );
+
+      box-shadow:
+        0 0 20px #7c3aed55;
+
+      transition: .3s;
+
+      opacity: 0;
+      animation: slideUp 1s 1s forwards;
+    }
+
+    .button:hover {
+      transform: translateY(-6px) scale(1.05);
+
+      box-shadow:
+        0 0 40px #7c3aed99;
+    }
+
+    /* ================= SECTION TITLE ================= */
+
+    .title {
+      font-size: 50px;
+      margin-bottom: 35px;
+    }
+
+    .title span {
+      color: #8b5cf6;
+    }
+
+    /* ================= CARDS ================= */
+
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+
+    .card {
+      position: relative;
+
+      padding: 35px;
+
+      border-radius: 25px;
+
+      background: rgba(255,255,255,.035);
+
+      border: 1px solid rgba(255,255,255,.08);
+
+      backdrop-filter: blur(15px);
+
+      transform-style: preserve-3d;
+
+      transition:
+        transform .15s ease,
+        border .3s ease,
+        box-shadow .3s ease;
+    }
+
+    .card::before {
+      content: "";
+
+      position: absolute;
+      inset: -1px;
+
+      border-radius: inherit;
+
+      background:
+        linear-gradient(
+          120deg,
+          transparent,
+          #8b5cf655,
+          transparent
+        );
+
+      opacity: 0;
+
+      transition: .4s;
+
+      z-index: -1;
+    }
+
+    .card:hover {
+      border-color: #8b5cf688;
+
+      box-shadow:
+        0 20px 60px #00000066,
+        0 0 30px #8b5cf622;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card h2 {
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      color: #888;
+      line-height: 1.7;
+    }
+
+    /* ================= PROJECTS ================= */
+
+    .projects {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .project {
+      padding: 28px;
+
+      border-radius: 22px;
+
+      background: rgba(255,255,255,.03);
+
+      border: 1px solid #222;
+
+      transition: .4s;
+
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project::after {
+      content: "";
+
+      position: absolute;
+
+      width: 100px;
+      height: 100px;
+
+      background: #06b6d4;
+
+      border-radius: 50%;
+
+      filter: blur(60px);
+
+      right: -40px;
+      top: -40px;
+
+      opacity: 0;
+
+      transition: .5s;
+    }
+
+    .project:hover {
+      transform: translateY(-12px);
+
+      border-color: #06b6d4;
+
+      box-shadow:
+        0 20px 50px #06b6d422;
+    }
+
+    .project:hover::after {
+      opacity: .5;
+    }
+
+    .project h2 {
+      position: relative;
+      z-index: 2;
+    }
+
+    .project p {
+      color: #777;
+      margin-top: 10px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ================= CONTACT ================= */
+
+    .contact {
+      margin-top: 30px;
+      color: #888;
+    }
+
+    .contact a {
+      color: #22d3ee;
+      text-decoration: none;
+      transition: .3s;
+    }
+
+    .contact a:hover {
+      color: #fff;
+      text-shadow: 0 0 15px #22d3ee;
+    }
+
+    /* ================= ANIMATIONS ================= */
+
+    @keyframes slideUp {
+
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+    }
+
+    @keyframes slideDown {
+
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+    }
+
+    @keyframes gradientMove {
+
+      0% {
+        background-position: 0%;
+      }
+
+      100% {
+        background-position: 300%;
+      }
+
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 700px) {
+
+      section {
+        min-height: auto;
+        padding: 100px 0;
+      }
+
+      .hero {
+        min-height: 100vh;
+      }
+
+      .cards,
+      .projects {
+        grid-template-columns: 1fr;
+      }
+
+      .title {
+        font-size: 38px;
+      }
+
+      .role {
+        font-size: 20px;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+  <!-- BACKGROUND -->
+
+  <div class="background">
+
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+
+  </div>
+
+
+  <!-- PARTICLES -->
+
+  <div class="particles" id="particles"></div>
+
+
+  <!-- MOUSE GLOW -->
+
+  <div class="mouse-glow" id="mouseGlow"></div>
+
+
+  <main>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+
+      <div class="hello">
+        HELLO, I'M
+      </div>
+
+      <h1>
+        Vikramjeet Chawla
+      </h1>
+
+      <div class="role">
+        Software Developer
+      </div>
+
+      <p class="description">
+        I build modern websites and digital experiences
+        with clean design, creative interactions and smooth
+        animations.
+      </p>
+
+      <a href="#about" class="button">
+        Explore My Work ↓
+      </a>
+
+    </section>
+
+
+    <!-- ================= ABOUT ================= -->
+
+    <section id="about">
+
+      <h2 class="title">
+        About <span>Me</span>
+      </h2>
+
+      <div class="cards">
+
+        <div class="card tilt">
+
+          <h2>
+            Who I Am
+          </h2>
+
+          <p>
+            I'm a developer passionate about creating
+            beautiful and interactive web experiences.
+            I'm a developer passionate about creating
+            beautiful and interactive web experiences.
+            I'm a developer passionate about creating
+            beautiful and interactive web experiences.
+          </p>
+
+        </div>
+
+
+        <div class="card tilt">
+
+          <h2>
+            My Skills
+          </h2>
+
+          <p>
+            HTML • CSS • JavaScript • React
+            • UI/UX • Git • UI/UX • Git • UI/UX • Git • UI/UX • Git
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= WORK ================= -->
+
+    <section>
+
+      <h2 class="title">
+        Selected <span>Work</span>
+      </h2>
+
+      <div class="projects">
+
+        <div class="project">
+
+          <h2>
+            Project One
+          </h2>
+
+          <p>
+            A modern animated landing page.
+          </p>
+
+        </div>
+
+
+        <div class="project">
+
+          <h2>
+            Project Two
+          </h2>
+
+          <p>
+            An interactive web application.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="contact">
+
+        Let's build something together →
+        <a href="mailto:vikramjeet.chawla@pinnacle.in">
+          vikramjeet.chawla@pinnacle.in
+        </a>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <script>
+
+// /* ================= PARTICLES ================= */
+
+const particleContainer =
+  document.getElementById("particles");
+
+for (let i = 0; i < 45; i++) {
+
+  const particle =
+    document.createElement("div");
+
+  particle.classList.add("particle");
+
+  particle.style.left =
+    Math.random() * 100 + "%";
+
+  particle.style.animationDuration =
+    (5 + Math.random() * 10) + "s";
+
+  particle.style.animationDelay =
+    Math.random() * 8 + "s";
+
+  particle.style.opacity =
+    0.2 + Math.random() * 0.8;
+
+  particle.style.bottom =
+    -Math.random() * 100 + "px";
+
+  const size =
+    2 + Math.random() * 4;
+
+  particle.style.width =
+    size + "px";
+
+  particle.style.height =
+    size + "px";
+
+  particleContainer.appendChild(particle);
+}
