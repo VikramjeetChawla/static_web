@@ -5,680 +5,562 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Your Name | Portfolio</title>
+  <title>Vikramjeet Chawla | Software Developer and API Documentation</title>
+  <meta name="description" content="Software developer building WhatsApp chatbots and backend services, and writing API documentation with Swagger UI, Docusaurus, and GitBook.">
+  <meta name="theme-color" content="#0f1f3d">
+
+  <meta property="og:title" content="Vikramjeet Chawla | Software Developer and API Documentation">
+  <meta property="og:description" content="WhatsApp chatbots, backend services, and API documentation samples.">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1f3d'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-size='26' font-weight='700' text-anchor='middle' fill='%23ffffff'%3EVC%3C/text%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root {
+      --page: #f5f7fb;
+      --surface: #ffffff;
+      --ink: #0f1f3d;
+      --muted: #475671;
+      --line: #dbe3ef;
+      --accent: #1c6bd6;
+      --accent-ink: #ffffff;
+      --panel: #0f1f3d;
+      --panel-line: #223458;
+      --panel-text: #dce6f7;
+      --get: #2e8555;
+      --post: #1c6bd6;
+      --put: #b45f00;
+      --delete: #c62828;
+      --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     }
 
-    html {
-      scroll-behavior: smooth;
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --page: #0a111f;
+        --surface: #0f182b;
+        --ink: #e8eefb;
+        --muted: #a6b4cd;
+        --line: #22304b;
+        --accent: #6aa5ff;
+        --accent-ink: #0a111f;
+        --panel: #070d19;
+        --panel-line: #1d2b46;
+      }
     }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      background: #050505;
-      color: white;
-      font-family: Arial, sans-serif;
-      overflow-x: hidden;
+      background: var(--page);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 17px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* ================= BACKGROUND ================= */
+    a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    a:hover { text-decoration-thickness: 2px; }
 
-    .background {
-      position: fixed;
-      inset: 0;
-      z-index: -10;
-      overflow: hidden;
-      background:
-        radial-gradient(
-          circle at 50% 50%,
-          #151020 0%,
-          #050505 55%
-        );
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+
+    .skip {
+      position: absolute; left: 12px; top: -60px; z-index: 20;
+      background: var(--accent); color: var(--accent-ink);
+      padding: 10px 14px; border-radius: 6px; text-decoration: none;
+    }
+    .skip:focus { top: 12px; }
+
+    /* ---------- Layout ---------- */
+
+    .shell {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      min-height: 100vh;
     }
 
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(90px);
-      opacity: .35;
-      pointer-events: none;
+    .sidebar {
+      position: sticky; top: 0; align-self: start;
+      height: 100vh;
+      display: flex; flex-direction: column; justify-content: space-between;
+      padding: 32px 24px;
+      background: var(--surface);
+      border-right: 1px solid var(--line);
     }
 
-    .orb1 {
-      width: 350px;
-      height: 350px;
-      background: #7c3aed;
-      top: -150px;
-      left: -100px;
-      animation: orbMove1 8s infinite alternate ease-in-out;
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); }
+    .mark {
+      flex: none; width: 40px; height: 40px; border-radius: 9px;
+      display: grid; place-items: center;
+      background: #0f1f3d; color: #fff;
+      font-weight: 600; font-size: 16px; letter-spacing: .02em;
     }
+    .brand-name { font-weight: 600; line-height: 1.25; }
+    .brand-role { display: block; font-weight: 400; font-size: 14px; color: var(--muted); }
 
-    .orb2 {
-      width: 300px;
-      height: 300px;
-      background: #06b6d4;
-      right: -100px;
-      bottom: -100px;
-      animation: orbMove2 10s infinite alternate ease-in-out;
+    .nav { list-style: none; margin-top: 36px; }
+    .nav a {
+      display: block; padding: 8px 12px; margin-left: -12px;
+      color: var(--muted); text-decoration: none; font-size: 16px;
+      border-left: 2px solid transparent;
     }
+    .nav a:hover { color: var(--ink); }
+    .nav a[aria-current="true"] { color: var(--ink); font-weight: 500; border-left-color: var(--accent); }
 
-    @keyframes orbMove1 {
-      0% {
-        transform: translate(0, 0);
-      }
-
-      100% {
-        transform: translate(200px, 150px);
-      }
-    }
-
-    @keyframes orbMove2 {
-      0% {
-        transform: translate(0, 0);
-      }
-
-      100% {
-        transform: translate(-150px, -120px);
-      }
-    }
-
-    /* ================= PARTICLES ================= */
-
-    .particles {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: -5;
-    }
-
-    .particle {
-      position: absolute;
-      width: 3px;
-      height: 3px;
-      background: #fff;
-      border-radius: 50%;
-      opacity: .4;
-      animation: particleFloat linear infinite;
-    }
-
-    @keyframes particleFloat {
-
-      from {
-        transform: translateY(100vh);
-      }
-
-      to {
-        transform: translateY(-10vh);
-      }
-
-    }
-
-    /* ================= MOUSE GLOW ================= */
-
-    .mouse-glow {
-      position: fixed;
-      width: 350px;
-      height: 350px;
-      border-radius: 50%;
-      background: #7c3aed;
-      filter: blur(120px);
-      opacity: .08;
-      pointer-events: none;
-      transform: translate(-50%, -50%);
-      z-index: -1;
-    }
-
-    /* ================= MAIN ================= */
+    .side-links { list-style: none; font-size: 15px; }
+    .side-links li + li { margin-top: 6px; }
 
     main {
-      width: 90%;
-      max-width: 1000px;
-      margin: auto;
+      padding: 72px clamp(24px, 6vw, 80px) 40px;
+      max-width: 940px;
     }
 
-    section {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+    section { scroll-margin-top: 32px; }
+    section + section { margin-top: 88px; padding-top: 40px; border-top: 1px solid var(--line); }
+
+    h1 {
+      font-size: clamp(2.4rem, 5.4vw, 3.5rem);
+      line-height: 1.08; font-weight: 600; letter-spacing: -0.025em;
     }
+    h2 { font-size: 1.6rem; line-height: 1.25; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 24px; }
+    h3 { font-size: 1.15rem; line-height: 1.35; font-weight: 600; }
 
-    /* ================= HERO ================= */
+    p { max-width: 62ch; }
+    p + p { margin-top: 16px; }
 
-    .hero {
-      position: relative;
+    /* ---------- Hero ---------- */
+
+    .hero-role { margin-top: 14px; font-size: 1.2rem; color: var(--muted); max-width: 40ch; }
+    .hero-lead { margin-top: 24px; }
+
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .btn {
+      display: inline-block; padding: 11px 20px; border-radius: 6px;
+      font-weight: 500; font-size: 16px; text-decoration: none;
+      border: 1px solid var(--accent);
     }
+    .btn-primary { background: var(--accent); color: var(--accent-ink); }
+    .btn-primary:hover { filter: brightness(1.08); }
+    .btn-quiet { color: var(--accent); background: transparent; }
+    .btn-quiet:hover { background: color-mix(in srgb, var(--accent) 10%, transparent); }
 
-    .hello {
-      color: #a78bfa;
-      letter-spacing: 5px;
-      font-size: 14px;
-      opacity: 0;
-      animation: slideDown 1s .2s forwards;
-    }
-
-    .hero h1 {
-      font-size: clamp(60px, 11vw, 120px);
-      line-height: .95;
-      margin: 20px 0;
-
-      background:
-        linear-gradient(
-          90deg,
-          #ffffff,
-          #a78bfa,
-          #22d3ee,
-          #ffffff
-        );
-
-      background-size: 300%;
-
-      -webkit-background-clip: text;
-      color: transparent;
-
-      animation:
-        gradientMove 6s linear infinite,
-        slideUp 1s .4s forwards;
-
-      opacity: 0;
-    }
-
-    .role {
-      font-size: 24px;
-      color: #aaa;
-      margin-bottom: 15px;
-
-      opacity: 0;
-      animation: slideUp 1s .6s forwards;
-    }
-
-    .description {
-      color: #777;
-      max-width: 600px;
-      font-size: 18px;
-      line-height: 1.7;
-
-      opacity: 0;
-      animation: slideUp 1s .8s forwards;
-    }
-
-    /* ================= BUTTON ================= */
-
-    .button {
-      position: relative;
-      display: inline-block;
-      width: fit-content;
-
-      margin-top: 35px;
-      padding: 14px 28px;
-
-      color: white;
-      text-decoration: none;
-
-      border-radius: 40px;
-
-      background: linear-gradient(
-        90deg,
-        #7c3aed,
-        #06b6d4
-      );
-
-      box-shadow:
-        0 0 20px #7c3aed55;
-
-      transition: .3s;
-
-      opacity: 0;
-      animation: slideUp 1s 1s forwards;
-    }
-
-    .button:hover {
-      transform: translateY(-6px) scale(1.05);
-
-      box-shadow:
-        0 0 40px #7c3aed99;
-    }
-
-    /* ================= SECTION TITLE ================= */
-
-    .title {
-      font-size: 50px;
-      margin-bottom: 35px;
-    }
-
-    .title span {
-      color: #8b5cf6;
-    }
-
-    /* ================= CARDS ================= */
-
-    .cards {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 25px;
-    }
-
-    .card {
-      position: relative;
-
-      padding: 35px;
-
-      border-radius: 25px;
-
-      background: rgba(255,255,255,.035);
-
-      border: 1px solid rgba(255,255,255,.08);
-
-      backdrop-filter: blur(15px);
-
-      transform-style: preserve-3d;
-
-      transition:
-        transform .15s ease,
-        border .3s ease,
-        box-shadow .3s ease;
-    }
-
-    .card::before {
-      content: "";
-
-      position: absolute;
-      inset: -1px;
-
-      border-radius: inherit;
-
-      background:
-        linear-gradient(
-          120deg,
-          transparent,
-          #8b5cf655,
-          transparent
-        );
-
-      opacity: 0;
-
-      transition: .4s;
-
-      z-index: -1;
-    }
-
-    .card:hover {
-      border-color: #8b5cf688;
-
-      box-shadow:
-        0 20px 60px #00000066,
-        0 0 30px #8b5cf622;
-    }
-
-    .card:hover::before {
-      opacity: 1;
-    }
-
-    .card h2 {
-      margin-bottom: 12px;
-    }
-
-    .card p {
-      color: #888;
-      line-height: 1.7;
-    }
-
-    /* ================= PROJECTS ================= */
-
-    .projects {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    .project {
-      padding: 28px;
-
-      border-radius: 22px;
-
-      background: rgba(255,255,255,.03);
-
-      border: 1px solid #222;
-
-      transition: .4s;
-
-      position: relative;
+    .endpoint {
+      margin-top: 48px;
+      background: var(--panel);
+      border: 1px solid var(--panel-line);
+      border-radius: 10px;
       overflow: hidden;
+      color: var(--panel-text);
+    }
+    .endpoint-bar {
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+      padding: 14px 18px; border-bottom: 1px solid var(--panel-line);
+      font-family: var(--mono); font-size: 14px;
+    }
+    .endpoint-bar code { font-family: inherit; overflow-wrap: anywhere; }
+    .method {
+      display: inline-block; padding: 2px 9px; border-radius: 3px;
+      font-family: var(--mono); font-size: 12px; font-weight: 500; color: #fff; letter-spacing: .03em;
+    }
+    .method.get { background: var(--get); }
+    .method.post { background: var(--post); }
+    .method.put { background: var(--put); }
+    .method.delete { background: var(--delete); }
+
+    .endpoint-response { animation: reveal .7s .55s cubic-bezier(.2, .7, .2, 1) both; }
+    .endpoint-status {
+      padding: 12px 18px; font-family: var(--mono); font-size: 13px; color: #9fb4d6;
+      border-bottom: 1px solid var(--panel-line);
+    }
+    .endpoint-status strong { color: #8fd6a8; font-weight: 500; }
+    .endpoint pre {
+      padding: 18px; overflow-x: auto;
+      font-family: var(--mono); font-size: 14px; line-height: 1.7; tab-size: 2;
+    }
+    .k { color: #9cc4ff; }
+    .s { color: #8fd6a8; }
+    .n { color: #f2c078; }
+    .endpoint figcaption {
+      padding: 12px 18px; border-top: 1px solid var(--panel-line);
+      font-size: 14px; color: #9fb4d6;
     }
 
-    .project::after {
-      content: "";
-
-      position: absolute;
-
-      width: 100px;
-      height: 100px;
-
-      background: #06b6d4;
-
-      border-radius: 50%;
-
-      filter: blur(60px);
-
-      right: -40px;
-      top: -40px;
-
-      opacity: 0;
-
-      transition: .5s;
+    @keyframes reveal {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: none; }
     }
 
-    .project:hover {
-      transform: translateY(-12px);
+    /* ---------- About ---------- */
 
-      border-color: #06b6d4;
-
-      box-shadow:
-        0 20px 50px #06b6d422;
+    .facts { margin-top: 32px; }
+    .facts div {
+      display: grid; grid-template-columns: 160px 1fr; gap: 16px;
+      padding: 14px 0; border-top: 1px solid var(--line);
     }
+    .facts div:last-child { border-bottom: 1px solid var(--line); }
+    dt { color: var(--muted); }
+    dd { max-width: 60ch; }
 
-    .project:hover::after {
-      opacity: .5;
+    /* ---------- Skills ---------- */
+
+    .skills div {
+      display: grid; grid-template-columns: 220px 1fr; gap: 16px;
+      padding: 14px 0; border-top: 1px solid var(--line);
     }
+    .skills div:last-child { border-bottom: 1px solid var(--line); }
+    .skills dt { color: var(--ink); font-weight: 500; }
+    .skills dd { color: var(--muted); }
 
-    .project h2 {
-      position: relative;
-      z-index: 2;
+    /* ---------- Experience ---------- */
+
+    .timeline { list-style: none; border-left: 2px solid var(--line); margin-left: 6px; }
+    .timeline li { position: relative; padding: 0 0 44px 28px; }
+    .timeline li:last-child { padding-bottom: 0; }
+    .timeline li::before {
+      content: ""; position: absolute; left: -7px; top: 8px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--page); border: 2px solid var(--accent);
     }
+    .job-meta { color: var(--muted); font-size: 15px; margin-top: 2px; }
+    .timeline ul { margin-top: 14px; padding-left: 18px; max-width: 64ch; }
+    .timeline li li { padding: 0; margin-top: 8px; }
+    .timeline li li::before { display: none; }
 
-    .project p {
-      color: #777;
-      margin-top: 10px;
-      position: relative;
-      z-index: 2;
+    /* ---------- Projects ---------- */
+
+    .project + .project { margin-top: 48px; padding-top: 40px; border-top: 1px solid var(--line); }
+    .project p { margin-top: 10px; }
+    .endpoints { list-style: none; margin-top: 18px; max-width: 520px; }
+    .endpoints li {
+      display: flex; align-items: center; gap: 14px;
+      padding: 7px 0; border-top: 1px solid var(--line);
+      font-family: var(--mono); font-size: 14px;
     }
+    .endpoints li:last-child { border-bottom: 1px solid var(--line); }
+    .endpoints .method { min-width: 62px; text-align: center; }
+    .stack { margin-top: 16px; font-size: 15px; color: var(--muted); }
+    .project-links { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 16px; font-weight: 500; }
 
-    /* ================= CONTACT ================= */
+    /* ---------- Contact ---------- */
 
-    .contact {
-      margin-top: 30px;
-      color: #888;
-    }
+    .contact-list { list-style: none; margin-top: 24px; }
+    .contact-list li { padding: 10px 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: 160px 1fr; gap: 16px; }
+    .contact-list li:last-child { border-bottom: 1px solid var(--line); }
+    .contact-list span { color: var(--muted); }
 
-    .contact a {
-      color: #22d3ee;
-      text-decoration: none;
-      transition: .3s;
-    }
+    footer { margin-top: 88px; padding-top: 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: 15px; }
 
-    .contact a:hover {
-      color: #fff;
-      text-shadow: 0 0 15px #22d3ee;
-    }
+    /* ---------- Small screens ---------- */
 
-    /* ================= ANIMATIONS ================= */
+    @media (max-width: 900px) {
+      .shell { grid-template-columns: 1fr; }
 
-    @keyframes slideUp {
-
-      from {
-        opacity: 0;
-        transform: translateY(40px);
+      .sidebar {
+        position: sticky; top: 0; z-index: 10; height: auto;
+        flex-direction: row; align-items: center; justify-content: flex-start; gap: 20px;
+        padding: 12px 16px; border-right: 0; border-bottom: 1px solid var(--line);
       }
+      .brand-role { display: none; }
+      .nav { display: flex; margin-top: 0; overflow-x: auto; gap: 4px; white-space: nowrap; }
+      .nav a { margin-left: 0; padding: 8px 10px; border-left: 0; border-bottom: 2px solid transparent; }
+      .nav a[aria-current="true"] { border-bottom-color: var(--accent); }
+      .side-links { display: none; }
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
+      main { padding-top: 48px; }
+      section { scroll-margin-top: 80px; }
+      .facts div, .skills div, .contact-list li { grid-template-columns: 1fr; gap: 4px; }
     }
 
-    @keyframes slideDown {
-
-      from {
-        opacity: 0;
-        transform: translateY(-30px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .endpoint-response { animation: none; }
     }
-
-    @keyframes gradientMove {
-
-      0% {
-        background-position: 0%;
-      }
-
-      100% {
-        background-position: 300%;
-      }
-
-    }
-
-    /* ================= MOBILE ================= */
-
-    @media (max-width: 700px) {
-
-      section {
-        min-height: auto;
-        padding: 100px 0;
-      }
-
-      .hero {
-        min-height: 100vh;
-      }
-
-      .cards,
-      .projects {
-        grid-template-columns: 1fr;
-      }
-
-      .title {
-        font-size: 38px;
-      }
-
-      .role {
-        font-size: 20px;
-      }
-
-    }
-
   </style>
 </head>
 
-
 <body>
 
-  <!-- BACKGROUND -->
+  <a class="skip" href="#top">Skip to content</a>
 
-  <div class="background">
+  <div class="shell">
 
-    <div class="orb orb1"></div>
-    <div class="orb orb2"></div>
+    <!-- ================= SIDEBAR ================= -->
 
+    <header class="sidebar">
+      <div>
+        <a class="brand" href="#top">
+          <span class="mark" aria-hidden="true">VC</span>
+          <span class="brand-name">Vikramjeet Chawla
+            <span class="brand-role">Software developer</span>
+          </span>
+        </a>
+
+        <nav aria-label="Sections">
+          <ul class="nav">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <ul class="side-links">
+        <!-- REPLACE_GITHUB_USERNAME and REPLACE_LINKEDIN_PROFILE with your own -->
+        <li><a href="https://github.com/REPLACE_GITHUB_USERNAME">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/REPLACE_LINKEDIN_PROFILE">LinkedIn</a></li>
+      </ul>
+    </header>
+
+
+    <main id="top">
+
+      <!-- ================= HERO ================= -->
+
+      <section aria-labelledby="name">
+        <h1 id="name">Vikramjeet Chawla</h1>
+
+        <p class="hero-role">Software developer working on WhatsApp chatbots, backend services, and API documentation.</p>
+
+        <p class="hero-lead">
+          I have spent more than two years building and running messaging systems for government services,
+          and writing the documentation that explains them. I am now focusing on technical writing, with an
+          emphasis on API and developer documentation.
+        </p>
+
+        <div class="actions">
+          <a class="btn btn-primary" href="#projects">See my projects</a>
+          <a class="btn btn-quiet" href="#contact">Get in touch</a>
+        </div>
+
+        <figure class="endpoint">
+          <div class="endpoint-bar">
+            <span class="method get">GET</span>
+            <code>/api/products?category=electronics&amp;limit=1</code>
+          </div>
+          <div class="endpoint-response">
+            <div class="endpoint-status">Response <strong>200 OK</strong> &nbsp;application/json</div>
+<pre><code>{
+  <span class="k">"data"</span>: [
+    {
+      <span class="k">"id"</span>: <span class="n">1</span>,
+      <span class="k">"name"</span>: <span class="s">"Wireless Noise-Canceling Headphones"</span>,
+      <span class="k">"category"</span>: <span class="s">"electronics"</span>,
+      <span class="k">"price"</span>: <span class="n">199.99</span>,
+      <span class="k">"stock"</span>: <span class="n">45</span>,
+      <span class="k">"status"</span>: <span class="s">"in_stock"</span>
+    }
+  ],
+  <span class="k">"pagination"</span>: { <span class="k">"page"</span>: <span class="n">1</span>, <span class="k">"limit"</span>: <span class="n">1</span>, <span class="k">"total"</span>: <span class="n">1</span>, <span class="k">"totalPages"</span>: <span class="n">1</span> }
+}</code></pre>
+          </div>
+          <figcaption>A request and response from the product catalog API I built and documented. The full reference is under Projects.</figcaption>
+        </figure>
+      </section>
+
+
+      <!-- ================= ABOUT ================= -->
+
+      <section id="about" aria-labelledby="about-title">
+        <h2 id="about-title">About</h2>
+
+        <p>
+          I work for a company that sends messages and services over WhatsApp, SMS, voice, and email.
+          I started on the chatbot team, building WhatsApp services for government projects. I now work on
+          the backend team, where I maintain the client panel and the aggregator middleware, monitor
+          scheduled jobs, and deliver reports to clients.
+        </p>
+        <p>
+          Writing the chatbot workflow documents was the part of the job I enjoyed most. So I built my own
+          documentation samples, including an API reference in Swagger UI, a Docusaurus site, and a GitBook
+          portal, and I completed a course in technical writing.
+        </p>
+
+        <dl class="facts">
+          <div>
+            <dt>Education</dt>
+            <dd>B.E. in Electronics Engineering, Ramdeobaba University, Nagpur (2024)</dd>
+          </div>
+          <div>
+            <dt>Certification</dt>
+            <dd>Writing Effective Technical Documentation, Board Infinity on Coursera</dd>
+          </div>
+        </dl>
+      </section>
+
+
+      <!-- ================= SKILLS ================= -->
+
+      <section id="skills" aria-labelledby="skills-title">
+        <h2 id="skills-title">Skills</h2>
+
+        <dl class="skills">
+          <div>
+            <dt>Documentation</dt>
+            <dd>User manuals, administrator guides, API documentation, chatbot workflow documentation, editing and proofreading</dd>
+          </div>
+          <div>
+            <dt>Documentation tools</dt>
+            <dd>Docusaurus, GitBook, Confluence, content management systems</dd>
+          </div>
+          <div>
+            <dt>API and testing</dt>
+            <dd>Swagger UI, Postman, Axios, REST APIs</dd>
+          </div>
+          <div>
+            <dt>Backend</dt>
+            <dd>Node.js, Express.js, JavaScript, SQL, MongoDB</dd>
+          </div>
+          <div>
+            <dt>Workflow</dt>
+            <dd>Git, GitHub, Jira, working with engineers, operations, and clients</dd>
+          </div>
+        </dl>
+      </section>
+
+
+      <!-- ================= EXPERIENCE ================= -->
+
+      <section id="experience" aria-labelledby="experience-title">
+        <h2 id="experience-title">Experience</h2>
+
+        <ol class="timeline">
+          <li>
+            <h3>Software Developer, WhatsApp Backend Team</h3>
+            <p class="job-meta">Pinnacle Teleservices Pvt Ltd. 11+ months, current.</p>
+            <ul>
+              <li>Maintain the client panel used to view and manage WhatsApp messaging campaigns.</li>
+              <li>Maintain the aggregator middleware: query processing, exception handling, API key management, and logging.</li>
+              <li>Monitor scheduled cron jobs and SFTP logs, and generate and deliver MIS reports to clients.</li>
+            </ul>
+          </li>
+          <li>
+            <h3>Junior Software Developer, WhatsApp Chatbot Team</h3>
+            <p class="job-meta">Pinnacle Teleservices Pvt Ltd. 15 months.</p>
+            <ul>
+              <li>Built WhatsApp chatbot services for two government projects, covering OTP verification, registration and sign-in, application forms, document uploads, online payments, and certificate and receipt downloads.</li>
+              <li>Wrote the chatbot workflow documentation for registration, login, password recovery, OTP verification, form inputs, uploads, payments, and downloads.</li>
+            </ul>
+          </li>
+        </ol>
+      </section>
+
+
+      <!-- ================= PROJECTS ================= -->
+
+      <section id="projects" aria-labelledby="projects-title">
+        <h2 id="projects-title">Projects</h2>
+
+        <article class="project">
+          <h3>Product Catalog API and its Swagger UI reference</h3>
+          <p>
+            A REST API for managing products in an online store, with filtering, sorting, and pagination.
+            The reference lists every parameter, request body, response, and error code, and uses one error
+            format across all endpoints. Readers can try each endpoint in the browser.
+          </p>
+          <ul class="endpoints" aria-label="Endpoints">
+            <li><span class="method get">GET</span> /api/products</li>
+            <li><span class="method get">GET</span> /api/products/{id}</li>
+            <li><span class="method post">POST</span> /api/products</li>
+            <li><span class="method put">PUT</span> /api/products/{id}</li>
+            <li><span class="method delete">DELETE</span> /api/products/{id}</li>
+          </ul>
+          <p class="stack">Built with Node.js and Express. Documented with Swagger UI and OpenAPI 3.0.</p>
+          <p class="project-links">
+            <a href="https://vikram-swaggerui.onrender.com/api-docs">Open the live Swagger UI</a>
+            <!-- REPLACE_API_REPO with the link to the API's GitHub repository -->
+            <a href="https://github.com/REPLACE_GITHUB_USERNAME/REPLACE_API_REPO">View the code</a>
+          </p>
+        </article>
+
+        <article class="project">
+          <h3>API documentation site</h3>
+          <p>
+            A Docusaurus site for the API above. It covers installation, a reference page for each endpoint,
+            guides to filtering, sorting, and pagination, an FAQ, and a troubleshooting page. Every endpoint
+            page follows one template, so readers always find parameters, examples, and errors in the same place.
+          </p>
+          <p class="stack">Docusaurus, Markdown and MDX, Swagger UI.</p>
+          <p class="project-links">
+            <!-- REPLACE_DOCS_SITE_LINK with the address of your published Docusaurus site -->
+            <a href="REPLACE_DOCS_SITE_LINK">Read the documentation</a>
+            <a href="https://github.com/REPLACE_GITHUB_USERNAME/REPLACE_DOCS_REPO">View the source</a>
+          </p>
+        </article>
+
+        <article class="project">
+          <h3>Employee documentation portal</h3>
+          <p>
+            A sample company portal with an onboarding guide, five how-to guides, and three IT policies.
+            I wrote two style guides for it, one for how-to pages and one for policy pages, so that every
+            page of the same type has the same structure.
+          </p>
+          <p class="stack">GitBook.</p>
+          <p class="project-links">
+            <!-- REPLACE_GITBOOK_LINK with the address of your published GitBook site -->
+            <a href="REPLACE_GITBOOK_LINK">Open the portal</a>
+          </p>
+        </article>
+      </section>
+
+
+      <!-- ================= CONTACT ================= -->
+
+      <section id="contact" aria-labelledby="contact-title">
+        <h2 id="contact-title">Contact</h2>
+
+        <p>I am looking for technical writer and API documentation roles. Email is the fastest way to reach me.</p>
+
+        <ul class="contact-list">
+          <!-- REPLACE_EMAIL with a personal email address, not a work address -->
+          <li><span>Email</span> <a href="mailto:REPLACE_EMAIL">REPLACE_EMAIL</a></li>
+          <li><span>LinkedIn</span> <a href="https://www.linkedin.com/in/REPLACE_LINKEDIN_PROFILE">linkedin.com/in/REPLACE_LINKEDIN_PROFILE</a></li>
+          <li><span>GitHub</span> <a href="https://github.com/REPLACE_GITHUB_USERNAME">github.com/REPLACE_GITHUB_USERNAME</a></li>
+          <!-- Add resume.pdf to the same folder as index.html, or delete this line -->
+          <li><span>Resume</span> <a href="resume.pdf">Download as PDF</a></li>
+        </ul>
+      </section>
+
+      <footer>
+        &copy; 2026 Vikramjeet Chawla
+      </footer>
+
+    </main>
   </div>
 
 
-  <!-- PARTICLES -->
-
-  <div class="particles" id="particles"></div>
-
-
-  <!-- MOUSE GLOW -->
-
-  <div class="mouse-glow" id="mouseGlow"></div>
-
-
-  <main>
-
-
-    <!-- ================= HERO ================= -->
-
-    <section class="hero">
-
-      <div class="hello">
-        HELLO, I'M
-      </div>
-
-      <h1>
-        Vikramjeet Chawla
-      </h1>
-
-      <div class="role">
-        Software Developer
-      </div>
-
-      <p class="description">
-        I build modern websites and digital experiences
-        with clean design, creative interactions and smooth
-        animations.
-      </p>
-
-      <a href="#about" class="button">
-        Explore My Work ↓
-      </a>
-
-    </section>
-
-
-    <!-- ================= ABOUT ================= -->
-
-    <section id="about">
-
-      <h2 class="title">
-        About <span>Me</span>
-      </h2>
-
-      <div class="cards">
-
-        <div class="card tilt">
-
-          <h2>
-            Who I Am
-          </h2>
-
-          <p>
-            I'm a developer passionate about creating
-            beautiful and interactive web experiences.
-            I'm a developer passionate about creating
-            beautiful and interactive web experiences.
-            I'm a developer passionate about creating
-            beautiful and interactive web experiences.
-          </p>
-
-        </div>
-
-
-        <div class="card tilt">
-
-          <h2>
-            My Skills
-          </h2>
-
-          <p>
-            HTML • CSS • JavaScript • React
-            • UI/UX • Git • UI/UX • Git • UI/UX • Git • UI/UX • Git
-          </p>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ================= WORK ================= -->
-
-    <section>
-
-      <h2 class="title">
-        Selected <span>Work</span>
-      </h2>
-
-      <div class="projects">
-
-        <div class="project">
-
-          <h2>
-            Project One
-          </h2>
-
-          <p>
-            A modern animated landing page.
-          </p>
-
-        </div>
-
-
-        <div class="project">
-
-          <h2>
-            Project Two
-          </h2>
-
-          <p>
-            An interactive web application.
-          </p>
-
-        </div>
-
-      </div>
-
-
-      <div class="contact">
-
-        Let's build something together →
-        <a href="mailto:vikramjeet.chawla@pinnacle.in">
-          vikramjeet.chawla@pinnacle.in
-        </a>
-
-      </div>
-
-    </section>
-
-  </main>
-
-
   <script>
+    // Highlight the current section in the navigation
+    (function () {
+      var links = Array.prototype.slice.call(document.querySelectorAll('.nav a'));
+      if (!('IntersectionObserver' in window) || !links.length) return;
 
-// /* ================= PARTICLES ================= */
+      var byId = {};
+      links.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
 
-const particleContainer =
-  document.getElementById("particles");
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          links.forEach(function (a) { a.removeAttribute('aria-current'); });
+          var link = byId[entry.target.id];
+          if (link) link.setAttribute('aria-current', 'true');
+        });
+      }, { rootMargin: '-30% 0px -60% 0px' });
 
-for (let i = 0; i < 45; i++) {
+      Object.keys(byId).forEach(function (id) {
+        var section = document.getElementById(id);
+        if (section) observer.observe(section);
+      });
+    })();
+  </script>
 
-  const particle =
-    document.createElement("div");
-
-  particle.classList.add("particle");
-
-  particle.style.left =
-    Math.random() * 100 + "%";
-
-  particle.style.animationDuration =
-    (5 + Math.random() * 10) + "s";
-
-  particle.style.animationDelay =
-    Math.random() * 8 + "s";
-
-  particle.style.opacity =
-    0.2 + Math.random() * 0.8;
-
-  particle.style.bottom =
-    -Math.random() * 100 + "px";
-
-  const size =
-    2 + Math.random() * 4;
-
-  particle.style.width =
-    size + "px";
-
-  particle.style.height =
-    size + "px";
-
-  particleContainer.appendChild(particle);
-}
+</body>
+</html>
